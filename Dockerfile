@@ -59,6 +59,8 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
 # Copia gli script
 COPY scripts/ /var/www/scripts/
 
+RUN chmod 777 /var/www/scripts/*
+
 # Rendiamo gli script eseguibili
 RUN chmod +x /var/www/scripts/*.sh
 
