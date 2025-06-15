@@ -17,7 +17,8 @@ ENV PHP_INI_DIR=/usr/local/lsws/lsphp${PHP_VERSION}/etc/php/8.2/mods-available/
 
 
 # Installa dipendenze essenziali
-RUN apt-get update && apt-get upgrade -y && apt-get dist-upgrade -y && apt-get autoremove -y && apt-get clean \
+RUN apt-get update && apt-get upgrade -y && apt-get dist-upgrade -y && apt-get autoremove -y \
+    && apt-get install -y \
     wget \
     wait-for-it \
     gettext-base \
@@ -59,9 +60,9 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
 # Copia gli script
 COPY --chmod=755 scripts/ /var/www/scripts/
 
-# Rendiamo gli script eseguibili
-RUN chmod +x /var/www/scripts/*.sh
-RUN chmod +x /var/www/scripts/docker-entrypoint.sh
+# Impostiamo l'ENTRYPOINT
+ENTRYPOINT ["/var/www/scripts/docker-entrypoint.sh"]
+CMD ["/usr/local/lsws/bin/lswsctrl", "start", "-n"]
 
 # Aggiorna i pacchetti e installa le versioni sicure per Ubuntu 24.04
 RUN apt-get update && apt-get install -y \
@@ -85,6 +86,3 @@ RUN apt-get update && apt-get install -y \
 RUN chmod 644 /etc/apt/sources.list.d/* \
     && chmod 644 /etc/apt/sources.list
 
-# Impostiamo l'ENTRYPOINT
-ENTRYPOINT ["/var/www/scripts/docker-entrypoint.sh"]
-CMD ["/usr/local/lsws/bin/lswsctrl", "start", "-n"]
