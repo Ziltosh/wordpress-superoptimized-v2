@@ -140,10 +140,8 @@ services:
 # Definizione dei networks
 networks:
   wordpress_network:
-    driver: bridge
     internal: true
   wordpress_public:
-    driver: bridge
 
 volumes:
   wordpress_data:
