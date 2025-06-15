@@ -46,7 +46,7 @@ services:
       - wordpress_data:/var/www/vhosts/localhost/html
       - ./config/vhosts:/usr/local/lsws/conf/vhosts/
       - ./config/php/php.ini:/usr/local/lsws/lsphp${PHP_VERSION}/etc/php/8.2/litespeed/php.ini:ro
-      - ./scripts:/var/www/scripts:ro
+    # - ./scripts:/var/www/scripts:ro
       - php_extensions:/usr/local/lsws/lsphp${PHP_VERSION}/lib/php
       - wordpress_logs:/var/log/wordpress
     ports:
@@ -151,6 +151,3 @@ volumes:
   php_config:
   php_extensions:
   wordpress_logs:
-  fail2ban_data:
-  fail2ban_run:
-  fail2ban_tmp:
