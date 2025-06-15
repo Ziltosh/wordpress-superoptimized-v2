@@ -50,9 +50,7 @@ services:
       - php_extensions:/usr/local/lsws/lsphp${PHP_VERSION}/lib/php
       - wordpress_logs:/var/log/wordpress
     ports:
-      - "${HTTP_PORT}:80"
-      - "${HTTPS_PORT}:443"
-      - "7080:7080"
+      - 7080
     healthcheck:
       test:
         - CMD
@@ -64,7 +62,6 @@ services:
       retries: 10
     networks:
       - wordpress_network
-      - wordpress_public
     depends_on:
       - mysql
     restart: always
@@ -140,7 +137,6 @@ services:
 # Definizione dei networks
 networks:
   wordpress_network:
-  wordpress_public:
 
 volumes:
   wordpress_data:
