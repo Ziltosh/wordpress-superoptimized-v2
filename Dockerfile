@@ -9,7 +9,6 @@ FROM litespeedtech/openlitespeed:${OPENLITESPEED_VERSION}-lsphp${PHP_VERSION}
 ARG RELAY_VERSION=v0.8.0
 ARG RELAY_PHP_VERSION=8.2
 ARG PLATFORM=x86-64
-ARG PHP_VERSION=82
 
 # Imposta le directory PHP
 ENV PHP_EXT_DIR=/usr/local/lsws/lsphp${PHP_VERSION}/lib/php/20220829
@@ -57,10 +56,7 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
     && mv wp-cli.phar /usr/local/bin/wp
 
 # Copia gli script
-COPY scripts/ /var/www/scripts/
-
-# Rendiamo gli script eseguibili
-RUN chmod +x /var/www/scripts/*.sh
+COPY --chmod=755 scripts/ /var/www/scripts/
 
 # Impostiamo l'ENTRYPOINT
 ENTRYPOINT ["/var/www/scripts/docker-entrypoint.sh"]
