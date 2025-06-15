@@ -101,41 +101,41 @@ services:
       - mysql
     restart: always
 
-  fail2ban:
-    image: crazymax/fail2ban:latest
-    container_name: fail2ban
-    environment:
-      - TZ=${TZ:-UTC}
-      - F2B_LOG_TARGET=STDOUT
-      - F2B_LOG_LEVEL=INFO
-      - F2B_DB_PURGE_AGE=7d
-      - F2B_IPTABLES_CHAIN=DOCKER-USER
-      - F2B_IPTABLES_MODE=auto
-      # Configurazioni email
-      - SSMTP_HOST=${SMTP_HOST:-}
-      - SSMTP_PORT=${SMTP_PORT:-25}
-      - SSMTP_USER=${SMTP_USER:-}
-      - SSMTP_PASSWORD=${SMTP_PASSWORD:-}
-      - SSMTP_TLS=${SMTP_TLS:-NO}
-      # Configurazioni iptables
-      - F2B_IPTABLES_FORWARD=1
-      - F2B_IPTABLES_BLOCKTYPE=DROP
-      - F2B_IPTABLES_LOCKINGOPT=-w
-    volumes:
-      - /var/lib/docker/containers:/var/lib/docker/containers:ro
-      - ./config/fail2ban:/etc/fail2ban:ro
-      - fail2ban_data:/var/lib/fail2ban
-      - fail2ban_run:/var/run/fail2ban
-      - fail2ban_tmp:/tmp
-    tmpfs:
-      - /tmp
-      - /var/tmp
-    network_mode: "host"
-    restart: always
-    cap_add:
-      - NET_ADMIN
-      - NET_RAW
-    privileged: true
+  #fail2ban:
+  #  image: crazymax/fail2ban:latest
+  #  container_name: fail2ban
+  #  environment:
+  #    - TZ=${TZ:-UTC}
+  #    - F2B_LOG_TARGET=STDOUT
+  #    - F2B_LOG_LEVEL=INFO
+  #    - F2B_DB_PURGE_AGE=7d
+  #    - F2B_IPTABLES_CHAIN=DOCKER-USER
+  #    - F2B_IPTABLES_MODE=auto
+  #    # Configurazioni email
+  #    - SSMTP_HOST=${SMTP_HOST:-}
+  #    - SSMTP_PORT=${SMTP_PORT:-25}
+  #    - SSMTP_USER=${SMTP_USER:-}
+  #    - SSMTP_PASSWORD=${SMTP_PASSWORD:-}
+  #    - SSMTP_TLS=${SMTP_TLS:-NO}
+  #    # Configurazioni iptables
+  #    - F2B_IPTABLES_FORWARD=1
+  #    - F2B_IPTABLES_BLOCKTYPE=DROP
+  #    - F2B_IPTABLES_LOCKINGOPT=-w
+  #  volumes:
+  #    - /var/lib/docker/containers:/var/lib/docker/containers:ro
+  #    - ./config/fail2ban:/etc/fail2ban:ro
+  #    - fail2ban_data:/var/lib/fail2ban
+  #    - fail2ban_run:/var/run/fail2ban
+  #    - fail2ban_tmp:/tmp
+  #  tmpfs:
+  #    - /tmp
+  #    - /var/tmp
+  #  network_mode: "host"
+  #  restart: always
+  #  cap_add:
+  #    - NET_ADMIN
+  #    - NET_RAW
+  #  privileged: true
 
 # Definizione dei networks
 networks:
