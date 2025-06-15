@@ -140,7 +140,6 @@ services:
 # Definizione dei networks
 networks:
   wordpress_network:
-    internal: true
   wordpress_public:
 
 volumes:
