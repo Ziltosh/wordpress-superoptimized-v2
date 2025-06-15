@@ -61,10 +61,7 @@ COPY --chmod=755 scripts/ /var/www/scripts/
 
 # Rendiamo gli script eseguibili
 RUN chmod +x /var/www/scripts/*.sh
-
-# Impostiamo l'ENTRYPOINT
-ENTRYPOINT ["/var/www/scripts/docker-entrypoint.sh"]
-CMD ["/usr/local/lsws/bin/lswsctrl", "start", "-n"]
+RUN chmod +x /var/www/scripts/docker-entrypoint.sh
 
 # Aggiorna i pacchetti e installa le versioni sicure per Ubuntu 24.04
 RUN apt-get update && apt-get install -y \
@@ -87,3 +84,7 @@ RUN apt-get update && apt-get install -y \
 # Imposta permessi restrittivi
 RUN chmod 644 /etc/apt/sources.list.d/* \
     && chmod 644 /etc/apt/sources.list
+
+# Impostiamo l'ENTRYPOINT
+ENTRYPOINT ["/var/www/scripts/docker-entrypoint.sh"]
+CMD ["/usr/local/lsws/bin/lswsctrl", "start", "-n"]
